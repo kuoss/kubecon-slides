@@ -1,0 +1,25 @@
+transform:
+  trace_statements:
+  metric_statements:
+  log_statements:
+    - set(attributes["test"], "pass") where IsMatch(body, "info")
+    - replace_pattern(attributes["test"], "(\\.*)", "$$1", SHA256)
+
+filter/ottl:
+    traces:
+      span:
+      spanevent:
+    metrics:
+      metric:
+      datapoint:
+    logs:
+      log_record:
+
+exporters:
+  debug:
+    verbosity: detailed
+
+service:
+  telemetry:
+    logs:
+      level: debug
